@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+    <style>
+        @media only screen and (min-width: 768px) {
+
+            #box {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                padding: 10px;
+            }
+        }
+
+        #whole {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #heading {
+            color: #005582;
+        }
+
+        .input {
+            border: navy;
+            padding: 5px;
+        }
+
+        .button {
+            border: royalblue;
+            background-color: #009B9F;
+            ;
+            padding: 8px 9px;
+            text-align: center;
+            display: inline-block;
+            cursor: pointer;
+
+        }
+
+        .dropdown {
+            background-color: #97ebdb;
+            padding: 5px 9px;
+            border: navy;
+            text-align: center;
+
+
+        }
+
+        body {
+            background-color: #daf8e3;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="whole">
+        <div id="heading">
+            <h1 align="center"> CALORIE TRACKER </h1>
+
+        </div>
+        <div id="intro">
+            <div id="enterReq">
+                <label for="food">Enter requirement:</label>
+                <br>
+                <input type="number" id="reqcalorie" class="input">
+                <button class="button" id="reqb">Enter</button>
+                <br>
+                <br>
+
+            </div>
+
+            <div id="calc">
+                <label>OR Calculate the required amount</label>
+                <button class="button" id="calcCal">Calculate</button>
+                <br>
+                <br>
+            </div>
+
+            <div id="ld">
+                <button id="load" class="button">Load previous</button>
+            </div>
+        </div>
+
+
+
+        <div id="box">
+
+            <div id="parentDiv">
+
+            </div>
+
+            <div id="calList">
+                <ul id="ul">
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        calcCal.onclick = function () {
+            document.getElementById("ld").innerHTML = " ";
+            document.getElementById("enterReq").innerHTML = " ";
+            document.getElementById("calc").innerHTML = " ";
+            var calculator = document.getElementById('calc');
+
+            var para1 = document.createElement("p");
+            var node1 = document.createTextNode("Enter weight(kg):");
+            para1.appendChild(node1);
+            calculator.appendChild(para1);
+            var wt = document.createElement('input');
+            wt.setAttribute("class", "input");
+            wt.setAttribute("id", "weight");
+            wt.setAttribute('type', 'number');
+            calculator.appendChild(wt);
+
+
+            var para2 = document.createElement("p");
+            var node2 = document.createTextNode("Select gender: ");
+            para2.appendChild(node2);
+            calculator.appendChild(para2);
+
+            var sel1 = document.createElement("SELECT");
+            sel1.setAttribute("id", "gender");
+            sel1.setAttribute("class", "dropdown");
+
+            var m = document.createElement("option");
+            m.setAttribute("value", "0");
+            var t1 = document.createTextNode("Male");
+            m.appendChild(t1);
+            var f = document.createElement("option");
+            f.setAttribute("value", "1");
+            var t2 = document.createTextNode("Female");
+            f.appendChild(t2);
+            sel1.appendChild(m);
+            sel1.appendChild(f);
+            calculator.appendChild(sel1);
+
+
+            var para3 = document.createElement("p");
+            var node3 = document.createTextNode("Body fat percentage: ");
+            para3.appendChild(node3);
+            calculator.appendChild(para3);
+
+            var sel2 = document.createElement("SELECT");
+            sel2.setAttribute("id", "bodyfat");
+            sel2.setAttribute("class", "dropdown");
+
+
+            var slot1 = document.createElement("option");
+            slot1.setAttribute("value", "1");
+            var f1 = document.createTextNode("10-16");
+            slot1.appendChild(f1);
+
+            var slot2 = document.createElement("option");
+            slot2.setAttribute("value", "2");
+            var f2 = document.createTextNode("17-24");
+            slot2.appendChild(f2);
+
+            var slot3 = document.createElement("option");
+            slot3.setAttribute("value", "3");
+            var f3 = document.createTextNode("25-34");
+            slot3.appendChild(f3);
+
+            var slot4 = document.createElement("option");
+            slot4.setAttribute("value", "4");
+            var f4 = document.createTextNode("above 34");
+            slot4.appendChild(f4);
+
+
+
+
+            sel2.appendChild(slot1);
+            sel2.appendChild(slot2);
+            sel2.appendChild(slot3);
+            sel2.appendChild(slot4);
+            calculator.appendChild(sel2);
+
+
+            var para4 = document.createElement("p");
+            var node4 = document.createTextNode("Daily Activity: ");
+            para4.appendChild(node4);
+            calculator.appendChild(para4);
+
+            var sel3 = document.createElement("SELECT");
+            sel3.setAttribute("id", "activity");
+            sel3.setAttribute("class", "dropdown");
+
+
+            var a1 = document.createElement("option");
+            a1.setAttribute("value", "1");
+            var b1 = document.createTextNode("Light");
+            a1.appendChild(b1);
+
+            var a2 = document.createElement("option");
+            a2.setAttribute("value", "2");
+            var b2 = document.createTextNode("Moderate");
+            a2.appendChild(b2);
+
+            var a3 = document.createElement("option");
+            a3.setAttribute("value", "3");
+            var b3 = document.createTextNode("Heavy");
+            a3.appendChild(b3);
+
+            sel3.appendChild(a1);
+            sel3.appendChild(a2);
+            sel3.appendChild(a3);
+            calculator.appendChild(sel3);
+
+            var para5 = document.createElement("p");
+            var node5 = document.createTextNode(" ");
+            para5.appendChild(node5);
+            calculator.appendChild(para5);
+
+            var calcbtn = document.createElement('button');
+            calcbtn.textContent = 'Calculate';
+            calcbtn.setAttribute("class", "button");
+            calculator.appendChild(calcbtn);
+
+
+            calcbtn.onclick = function () {
+                var q, r, s;
+                var w = wt.value;
+                if (wt.value > 0) {
+
+                    var g = sel1.options[sel1.selectedIndex].value;
+                    switch (g) {
+                        case '0': q = 1; break;
+                        case '1': q = 0.9; break;
+                    }
+                    var f = sel2.options[sel2.selectedIndex].value;
+                    switch (f) {
+                        case '1': r = 1; break;
+                        case '2': r = 0.95; break;
+                        case '3': r = 0.90; break;
+                        case '4': r = 0.85; break;
+                    }
+                    var a = sel3.options[sel3.selectedIndex].value;
+                    switch (a) {
+                        case '1': s = 1.42; break;
+                        case '2': s = 1.65; break;
+                        case '3': s = 1.9; break;
+                    }
+                    var rcal = w * q * r * s * 24;
+
+                    document.getElementById('intro').innerHTML = " ";
+                    calorietree(rcal, 0);
+
+                }
+                else {
+                    alert("Weight should be a positive number");
+
+                }
+            }
+
+
+
+
+
+
+
+
+
+        }
+
+        reqb.onclick = function () {
+
+
+            document.getElementById("ld").innerHTML = " ";
+
+            document.getElementById("calc").innerHTML = " ";
+            var rcal = document.getElementById("reqcalorie").value;
+
+            if (rcal > 0) {
+
+                calorietree(rcal, 0);
+            }
+            else {
+                alert("Calorie limit should be a positive number");
+            }
+        }
+
+
+        load.onclick = function () {
+            document.getElementById("calc").innerHTML = " ";
+            document.getElementById("ld").innerHTML = " ";
+            document.getElementById("enterReq").innerHTML = " ";
+            document.querySelector('ul').innerHTML = " ";
+            var p = localStorage.getItem("i");
+            var ircal = localStorage.getItem("rcal");
+            var fnames = JSON.parse(localStorage.getItem("fnames"));
+            var fcals = JSON.parse(localStorage.getItem("fcals"));
+            let net = 0;
+            for (m = 0; m < p; m++) {
+                net = net + fcals[m];
+            }
+            calorietree(ircal, net);
+
+
+            for (k = 0; k < p; k++) {
+                fname = fnames[k];
+                cal = fcals[k];
+                createList(fname, cal);
+
+            }
+
+
+
+        }
+
+
+
+        calorietree = function (rcal, n) {
+            var parent = document.getElementById("parentDiv");
+
+
+            var para0 = document.createElement("p");
+            var node0 = document.createTextNode("Calorie limit: " + rcal + "cal");
+            para0.appendChild(node0);
+            parent.appendChild(para0);
+
+
+            var para1 = document.createElement("p");
+            var node1 = document.createTextNode("Food Item:");
+            para1.appendChild(node1);
+            parent.appendChild(para1);
+            var food = document.createElement('input');
+            food.setAttribute("class", "input");
+            food.setAttribute('type', 'text');
+            parent.appendChild(food);
+
+            var para2 = document.createElement("p");
+            var node2 = document.createTextNode("Quantity(gm):");
+            para2.appendChild(node2);
+            parent.appendChild(para2);
+            var qty = document.createElement('input');
+            qty.setAttribute('type', 'number');
+            qty.setAttribute("class", "input");
+            parent.appendChild(qty);
+
+            var para = document.createElement("p");
+            var node = document.createTextNode("Enter the amount of nutrients(gm) per gm of food item");
+            para.appendChild(node);
+            parent.appendChild(para);
+
+            var para3 = document.createElement("p");
+            var node3 = document.createTextNode("Carbohydrates:");
+            para3.appendChild(node3);
+            parent.appendChild(para3);
+            var carb = document.createElement('input');
+            carb.setAttribute("class", "input");
+            carb.setAttribute('type', 'number');
+            parent.appendChild(carb);
+
+            var para4 = document.createElement("p");
+            var node4 = document.createTextNode("Fat:");
+            para4.appendChild(node4);
+            parent.appendChild(para4);
+            var fat = document.createElement('input');
+            fat.setAttribute("class", "input");
+            fat.setAttribute('type', 'number');
+            parent.appendChild(fat);
+
+            var para5 = document.createElement("p");
+            var node5 = document.createTextNode("Protein:");
+            para5.appendChild(node5);
+            parent.appendChild(para5);
+            var prot = document.createElement('input');
+            prot.setAttribute("class", "input");
+            prot.setAttribute('type', 'number');
+            parent.appendChild(prot);
+
+            var para6 = document.createElement("p");
+            var node6 = document.createTextNode(" ");
+            para6.appendChild(node6);
+            parent.appendChild(para6);
+
+
+            var addbtn = document.createElement('button');
+            addbtn.textContent = 'Add';
+            addbtn.setAttribute("class", "button");
+            parent.appendChild(addbtn);
+
+            var para7 = document.createElement("p");
+            var node7 = document.createTextNode(" ");
+            para7.appendChild(node7);
+            parent.appendChild(para7);
+
+            var str = document.createElement('button');
+            str.textContent = 'Save';
+            str.setAttribute("class", "button");
+            parent.appendChild(str);
+
+            var para8 = document.createElement("p");
+            var node8 = document.createTextNode(" ");
+            para8.appendChild(node8);
+            parent.appendChild(para8);
+
+
+            var num = rcal - n;
+            var i = 0;
+            var arr1 = []; var arr2 = [];
+
+            addbtn.onclick = function () {
+                var items
+
+                var fname = food.value;
+                var iqty = qty.value;
+                var icarb = carb.value;
+                var iprot = prot.value;
+                var ifat = fat.value;
+                food.value = " ";
+                qty.value = " ";
+                prot.value = " ";
+                carb.value = " ";
+                fat.value = " ";
+                var cal = ((icarb * 4) + (iprot * 4) + (ifat * 9)) * iqty;
+                num = num - cal;
+                arr1[i] = fname;
+                arr2[i] = cal;
+                i++;
+
+                if (num > 0) {
+                    alert("You can have " + num + "more calories");
+                }
+                else if (num == 0) {
+                    alert("You have reached today's calorie limit");
+                }
+                else {
+                    alert("You have exceeded calorie limit by " + -1 * num + " calories");
+                }
+                // var list=document.querySelector('ul');
+                createList(fname, cal);
+
+
+            }
+
+
+
+            str.onclick = function () {
+
+                localStorage.setItem("i", i);
+                localStorage.setItem("rcal", rcal);
+                localStorage.setItem("fnames", JSON.stringify(arr1));
+                localStorage.setItem("fcals", JSON.stringify(arr2));
+
+
+
+            }
+
+
+            createList = function (fooditem, netcal) {
+                var list = document.getElementById('ul');
+
+                var ele = document.createElement('li');
+
+                var lname = document.createElement("p");
+                lname.textContent = fooditem;
+                ele.appendChild(lname);
+
+                var lcal = document.createElement("p");
+                lcal.textContent = netcal + " cal";
+                ele.appendChild(lcal);
+
+                var lbtn = document.createElement('button');
+                lbtn.textContent = 'Delete';
+                lbtn.setAttribute("class", "button");
+                ele.appendChild(lbtn);
+
+                list.appendChild(ele);
+
+                lbtn.onclick = function (e) {
+                    var n = parseInt(lcal.textContent);
+                    num = num + n;
+                    list.removeChild(ele);
+
+                }
+            }
+
+        }         //}
+
+
+
+
+
+    </script>
+</body>
+
+
+</html>
