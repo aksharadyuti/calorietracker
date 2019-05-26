@@ -121,6 +121,29 @@
             wt.setAttribute('type', 'number');
             calculator.appendChild(wt);
 
+            var para_ = document.createElement("p");
+            var node_ = document.createTextNode("Enter height(cm):");
+            para_.appendChild(node_);
+            calculator.appendChild(para_);
+            var ht = document.createElement('input');
+            ht.setAttribute("class", "input");
+            ht.setAttribute("id", "height");
+            ht.setAttribute('type', 'number');
+            calculator.appendChild(ht);
+
+
+            var para_1 = document.createElement("p");
+            var node_1 = document.createTextNode("Enter age:");
+            para_1.appendChild(node_1);
+            calculator.appendChild(para_1);
+            var age = document.createElement('input');
+            age.setAttribute("class", "input");
+            age.setAttribute("id", "age");
+            age.setAttribute('type', 'number');
+            calculator.appendChild(age);
+
+
+
 
             var para2 = document.createElement("p");
             var node2 = document.createTextNode("Select gender: ");
@@ -143,45 +166,6 @@
             sel1.appendChild(f);
             calculator.appendChild(sel1);
 
-
-            var para3 = document.createElement("p");
-            var node3 = document.createTextNode("Body fat percentage: ");
-            para3.appendChild(node3);
-            calculator.appendChild(para3);
-
-            var sel2 = document.createElement("SELECT");
-            sel2.setAttribute("id", "bodyfat");
-            sel2.setAttribute("class", "dropdown");
-
-
-            var slot1 = document.createElement("option");
-            slot1.setAttribute("value", "1");
-            var f1 = document.createTextNode("10-16");
-            slot1.appendChild(f1);
-
-            var slot2 = document.createElement("option");
-            slot2.setAttribute("value", "2");
-            var f2 = document.createTextNode("17-24");
-            slot2.appendChild(f2);
-
-            var slot3 = document.createElement("option");
-            slot3.setAttribute("value", "3");
-            var f3 = document.createTextNode("25-34");
-            slot3.appendChild(f3);
-
-            var slot4 = document.createElement("option");
-            slot4.setAttribute("value", "4");
-            var f4 = document.createTextNode("above 34");
-            slot4.appendChild(f4);
-
-
-
-
-            sel2.appendChild(slot1);
-            sel2.appendChild(slot2);
-            sel2.appendChild(slot3);
-            sel2.appendChild(slot4);
-            calculator.appendChild(sel2);
 
 
             var para4 = document.createElement("p");
@@ -228,34 +212,42 @@
             calcbtn.onclick = function () {
                 var q, r, s;
                 var w = wt.value;
-                if (wt.value > 0) {
+                var h = ht.value;
+                var age_ = age.value;
+                if (wt.value > 0 && ht.value > 0 && age.value > 0) {
 
                     var g = sel1.options[sel1.selectedIndex].value;
                     switch (g) {
-                        case '0': q = 1; break;
-                        case '1': q = 0.9; break;
+                        case '0': q = 5; break;
+                        case '1': q = (-1 * 161); break;
                     }
-                    var f = sel2.options[sel2.selectedIndex].value;
-                    switch (f) {
-                        case '1': r = 1; break;
-                        case '2': r = 0.95; break;
-                        case '3': r = 0.90; break;
-                        case '4': r = 0.85; break;
-                    }
+
+
                     var a = sel3.options[sel3.selectedIndex].value;
                     switch (a) {
-                        case '1': s = 1.42; break;
-                        case '2': s = 1.65; break;
-                        case '3': s = 1.9; break;
+                        case '1': s = 1.53; break;
+                        case '2': s = 1.76; break;
+                        case '3': s = 2.25; break;
                     }
-                    var rcal = w * q * r * s * 24;
+
+                    var rcal = (10 * w) + (6.25 * h) - (5 * age_) + q;
+                    rcal = rcal * a;
+                    ;
 
                     document.getElementById('intro').innerHTML = " ";
                     calorietree(rcal, 0);
 
                 }
                 else {
-                    alert("Weight should be a positive number");
+                    if (wt.value <= 0) {
+                        alert("Weight should be a positive number");
+                    }
+                    else if (ht.value <= 0) {
+                        alert("Height should be a positive number");
+                    }
+                    else {
+                        alert("Age should be a positive number");
+                    }
 
                 }
             }
